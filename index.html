@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>30-Day Glow-Up — Life Design Template</title>
+  <meta name="description" content="A ready-made system for your body, habits, and confidence. Stop planning to start. Just fill it in." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #FAF7F2;
+      --blush:    #F2D4C8;
+      --sand:     #F2EDE6;
+      --border:   #E8E0D5;
+      --warm:     #8B6F5E;
+      --muted:    #5C5C5C;
+      --pale:     #A8A8A8;
+      --sage:     #A8B5A0;
+      --charcoal: #2C2C2C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── layout ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .container--narrow { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm);
+      text-decoration: none;
+    }
+
+    /* ── buttons ── */
+    .btn {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      cursor: pointer;
+    }
+    .btn:hover { opacity: 0.82; }
+
+    .btn--dark  { background: var(--charcoal); color: var(--cream); }
+    .btn--light { background: var(--cream);    color: var(--charcoal); }
+    .btn--lg    { font-size: 16px; padding: 16px 40px; }
+
+    /* ── hero ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(38px, 7vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    h1 em { font-style: italic; }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-footnote {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--sage);
+    }
+
+    /* ── divider ── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── section spacing ── */
+    section { padding: 72px 0; }
+
+    /* ── section headings ── */
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* ── problem section ── */
+    .problem { text-align: center; }
+    .problem p { font-size: 18px; color: var(--muted); line-height: 1.7; }
+    .problem p + p { margin-top: 16px; }
+    .problem p.strong { color: var(--charcoal); font-weight: 500; }
+
+    /* ── includes grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 22px;
+      background: var(--sand);
+      border-radius: 18px;
+    }
+
+    .card-emoji { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+
+    .card-label { font-weight: 500; font-size: 15px; }
+    .card-detail { font-size: 13px; color: var(--warm); margin-top: 3px; }
+
+    /* ── quote ── */
+    .quote-block {
+      background: var(--blush);
+      border-radius: 28px;
+      padding: 52px 48px;
+      text-align: center;
+    }
+
+    @media (max-width: 580px) { .quote-block { padding: 36px 24px; } }
+
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .quote-author { font-size: 13px; font-weight: 500; color: var(--warm); }
+
+    /* ── steps ── */
+    .steps { list-style: none; display: flex; flex-direction: column; gap: 36px; }
+
+    .step { display: flex; align-items: flex-start; gap: 24px; }
+
+    .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--border);
+      flex-shrink: 0;
+      width: 48px;
+      line-height: 1;
+    }
+
+    .step-title { font-weight: 500; font-size: 17px; margin-bottom: 6px; }
+    .step-body  { color: var(--muted); }
+
+    /* ── cta block ── */
+    .cta-block {
+      background: var(--charcoal);
+      color: var(--cream);
+      border-radius: 28px;
+      padding: 72px 48px;
+      text-align: center;
+      margin: 0 16px 64px;
+    }
+
+    @media (max-width: 580px) { .cta-block { padding: 48px 24px; margin: 0 0 48px; } }
+
+    .cta-block h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .cta-block p { color: var(--pale); font-size: 15px; margin-bottom: 32px; }
+    .cta-footnote { margin-top: 16px; font-size: 13px; color: #666; }
+
+    /* ── faq ── */
+    .faq-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+    .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+    .faq-q { font-weight: 500; margin-bottom: 8px; }
+    .faq-a { color: var(--muted); }
+
+    /* ── footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--pale);
+      font-size: 13px;
+    }
+
+    footer a { color: var(--pale); text-decoration: underline; }
+    footer a:hover { opacity: 0.7; }
+    footer p + p { margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">Life Design</a>
+    <a href="https://gumroad.com/l/YOUR_PRODUCT_SLUG" target="_blank" rel="noopener" class="btn btn--dark">
+      Get the template — €19
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">Notion template · instant download</p>
+    <h1>The 30-Day<br><em>Glow-Up</em> System</h1>
+    <p class="hero-sub">
+      Everything is already built. You just fill it in.
+      Your habits, your workouts, your skin-care, your reflection — all in one place, for 30 days.
+    </p>
+    <a href="https://gumroad.com/l/YOUR_PRODUCT_SLUG" target="_blank" rel="noopener" class="btn btn--dark btn--lg">
+      Get instant access — €19
+    </a>
+    <p class="hero-footnote">One-time payment · no subscription · refund if not satisfied</p>
+  </div>
+
+  <div class="container"><hr /></div>
+
+  <!-- PROBLEM -->
+  <section>
+    <div class="container--narrow problem">
+      <h2 class="section-title">You already know what to do.</h2>
+      <p>Drink more water. Move your body. Sleep. Reflect. Save money.</p>
+      <p>The problem is not knowledge. The problem is that without a system,<br>good intentions disappear by day three.</p>
+      <p class="strong">This template is the system.</p>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">What is inside</h2>
+      <div class="grid">
+
+        <div class="card">
+          <span class="card-emoji">💧</span>
+          <div>
+            <p class="card-label">Daily habit tracker</p>
+            <p class="card-detail">30 days, pre-structured</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-emoji">🏋️</span>
+          <div>
+            <p class="card-label">Workout planner</p>
+            <p class="card-detail">Weekly schedule + log</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-emoji">✨</span>
+          <div>
+            <p class="card-label">Skin-care routine tracker</p>
+            <p class="card-detail">AM &amp; PM routines</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-emoji">📏</span>
+          <div>
+            <p class="card-label">Body measurements log</p>
+            <p class="card-detail">Weight, waist, progress</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-emoji">📝</span>
+          <div>
+            <p class="card-label">Weekly reflection pages</p>
+            <p class="card-detail">Guided prompts</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="card-emoji">🌟</span>
+          <div>
+            <p class="card-label">Motivation &amp; vision pages</p>
+            <p class="card-detail">Start strong, stay strong</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section style="padding-top: 0;">
+    <div class="container--narrow">
+      <div class="quote-block">
+        <p class="quote-text">
+          "I have tried so many apps and planners. This is the first one where I actually kept going
+          past week one. The structure removes the decision fatigue."
+        </p>
+        <p class="quote-author">— Early tester, Berlin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="container--narrow">
+      <h2 class="section-title">Three steps</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">01</span>
+          <div>
+            <p class="step-title">Buy and duplicate</p>
+            <p class="step-body">After purchase you get a link. Click "Duplicate to my Notion". Takes 10 seconds.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-num">02</span>
+          <div>
+            <p class="step-title">Spend five minutes on day one</p>
+            <p class="step-body">Fill in your starting measurements and pick your three habits. That is it.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-num">03</span>
+          <div>
+            <p class="step-title">Open it every morning</p>
+            <p class="step-body">The template tells you exactly what to track. You just tick boxes and fill in numbers.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA BLOCK -->
+  <div class="cta-block">
+    <h2>Start your 30 days today.</h2>
+    <p>One template. One month. One version of yourself you have been meaning to become.</p>
+    <a href="https://gumroad.com/l/YOUR_PRODUCT_SLUG" target="_blank" rel="noopener" class="btn btn--light btn--lg">
+      Get the template — €19
+    </a>
+    <p class="cta-footnote">Instant Notion download · refund if not satisfied</p>
+  </div>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container--narrow">
+      <h2 class="section-title">Questions</h2>
+      <ul class="faq-list">
+        <li class="faq-item">
+          <p class="faq-q">What format does this come in?</p>
+          <p class="faq-a">You get a Notion template you duplicate into your own workspace in one click. Works on desktop and mobile.</p>
+        </li>
+        <li class="faq-item">
+          <p class="faq-q">Do I need a paid Notion plan?</p>
+          <p class="faq-a">No. The free Notion plan is enough to use everything inside.</p>
+        </li>
+        <li class="faq-item">
+          <p class="faq-q">Is this a course or coaching?</p>
+          <p class="faq-a">Neither. It is a ready-made system — you fill it in, the structure does the work.</p>
+        </li>
+        <li class="faq-item">
+          <p class="faq-q">What if it is not right for me?</p>
+          <p class="faq-a">If you buy it and feel it is not worth it, email me and I will refund you. No questions asked.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Questions? <a href="mailto:hello@example.com">hello@example.com</a></p>
+    <p>© 2024 Life Design Templates</p>
+  </footer>
+
+</body>
+</html>
