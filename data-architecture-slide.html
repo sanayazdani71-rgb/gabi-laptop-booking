@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Architecture Slide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    /* ── slide canvas 16:9 ── */
+    .slide {
+      background: #ffffff;
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.12);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      padding: 40px 48px 36px;
+      overflow: hidden;
+    }
+
+    /* ── header ── */
+    .slide-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .slide-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .slide-subtitle {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    /* ── main layout: 3 columns ── */
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr 56px 1fr;
+      align-items: center;
+      gap: 0;
+      height: 100%;
+    }
+
+    /* ── column wrappers ── */
+    .col { display: flex; flex-direction: column; gap: 8px; height: 100%; justify-content: center; }
+
+    /* ── section label above each column ── */
+    .col-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ── INPUT cards (sheets) ── */
+    .sheet {
+      border-radius: 10px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1.5px solid transparent;
+    }
+
+    .sheet-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sheet-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.3;
+    }
+
+    .sheet-items {
+      font-size: 10px;
+      color: #666;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* sheet colour themes */
+    .s1 { background: #FFF3E0; border-color: #FFB74D; }
+    .s2 { background: #E3F2FD; border-color: #42A5F5; }
+    .s3 { background: #F3E5F5; border-color: #AB47BC; }
+    .s4 { background: #E8F5E9; border-color: #66BB6A; }
+    .s5 { background: #FCE4EC; border-color: #EF5350; }
+
+    /* ── arrow ── */
+    .arrow-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #bbb;
+    }
+
+    .arrow-line {
+      width: 2px;
+      flex: 1;
+      background: #e0e0e0;
+      border-radius: 2px;
+    }
+
+    .arrow-head {
+      font-size: 18px;
+      color: #bbb;
+      line-height: 1;
+    }
+
+    .arrow-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      text-align: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 8px 0;
+    }
+
+    /* ── PROCESS box ── */
+    .process-box {
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .process-icon { font-size: 24px; }
+
+    .process-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+
+    .process-steps {
+      font-size: 9.5px;
+      color: #aaa;
+      line-height: 1.7;
+      text-align: left;
+      width: 100%;
+    }
+
+    .process-steps li {
+      list-style: none;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .process-steps li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #666;
+    }
+
+    /* ── OUTPUT cards ── */
+    .output-card {
+      border-radius: 10px;
+      padding: 8px 12px;
+      border-left: 3px solid transparent;
+    }
+
+    .output-card-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 3px;
+    }
+
+    .output-card-items {
+      font-size: 9.5px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .o1 { background: #FFF8E1; border-color: #FFC107; }
+    .o2 { background: #E8F5E9; border-color: #4CAF50; }
+    .o3 { background: #E3F2FD; border-color: #2196F3; }
+    .o4 { background: #FCE4EC; border-color: #E91E63; }
+    .o5 { background: #F3E5F5; border-color: #9C27B0; }
+
+    /* ── footer note ── */
+    .footer {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+      font-size: 9.5px;
+      color: #aaa;
+      text-align: center;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="slide-header">
+    <span class="slide-title">How the Excel data becomes environmental reports</span>
+    <span class="slide-subtitle">5 source sheets → calculation engine → per-unit output sheet (FST / Organisationseinheit)</span>
+  </div>
+
+  <div class="flow">
+
+    <!-- ── COLUMN 1: INPUTS ── -->
+    <div class="col">
+      <div class="col-label" style="color:#999;">Input — source sheets</div>
+
+      <div class="sheet s4">
+        <span class="sheet-icon">🏢</span>
+        <div>
+          <div class="sheet-name">Sheet 4 · Stammdaten</div>
+          <div class="sheet-items">Company · Organisational unit · Production plant</div>
+        </div>
+      </div>
+
+      <div class="sheet s1">
+        <span class="sheet-icon">📦</span>
+        <div>
+          <div class="sheet-name">Sheet 1 · Sachbilanzdaten</div>
+          <div class="sheet-items">Raw materials · Packaging · Auxiliary & operating materials (kg)</div>
+        </div>
+      </div>
+
+      <div class="sheet s2">
+        <span class="sheet-icon">⚡</span>
+        <div>
+          <div class="sheet-name">Sheet 2 · Energydaten</div>
+          <div class="sheet-items">Electricity · Thermal energy · Water · Wastewater (kWh / l)</div>
+        </div>
+      </div>
+
+      <div class="sheet s3">
+        <span class="sheet-icon">♻️</span>
+        <div>
+          <div class="sheet-name">Sheet 3 · Abfalldaten</div>
+          <div class="sheet-items">Waste type · Disposal method · Quantity (kg)</div>
+        </div>
+      </div>
+
+      <div class="sheet s5">
+        <span class="sheet-icon">🌍</span>
+        <div>
+          <div class="sheet-name">Sheet 5 · CO₂-daten</div>
+          <div class="sheet-items">Emission factor per material · Emission factor per disposal type (kgCO₂e / kg)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ARROW 1 ── -->
+    <div class="arrow-col">
+      <div class="arrow-line"></div>
+      <span style="font-size:20px; color:#ccc;">▶</span>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- ── COLUMN 2: PROCESS ── -->
+    <div class="col" style="gap:10px;">
+      <div class="col-label" style="color:#999; text-align:center;">Calculation engine (macro-enabled workbook)</div>
+      <div class="process-box" style="flex:1;">
+        <div class="process-icon">⚙️</div>
+        <div class="process-title">Per-unit aggregation<br>& KPI derivation</div>
+        <ul class="process-steps">
+          <li>Filter rows by company / org unit (Sheet 4)</li>
+          <li>Sum raw material quantities (Sheet 1)</li>
+          <li>Sum energy & water quantities (Sheet 2)</li>
+          <li>Sum waste quantities by type (Sheet 3)</li>
+          <li>Multiply quantities × CO₂ factors (Sheet 5)</li>
+          <li>Derive product output = material − waste + pkg</li>
+          <li>Calculate specific KPIs (per kg product)</li>
+          <li>Rank top materials / top wastes by CO₂ share</li>
+          <li>Compute year-on-year % change (2024 → 2025)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── ARROW 2 ── -->
+    <div class="arrow-col">
+      <div class="arrow-line"></div>
+      <span style="font-size:20px; color:#ccc;">▶</span>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- ── COLUMN 3: OUTPUTS ── -->
+    <div class="col">
+      <div class="col-label" style="color:#999;">Output — one sheet per org unit</div>
+
+      <div class="output-card o1">
+        <div class="output-card-title">📊 Verbrauch (absolut)</div>
+        <div class="output-card-items">Total material · Energy (electric + thermal) · Water · Wastewater · Product output · Waste (kg / kWh / l)</div>
+      </div>
+
+      <div class="output-card o2">
+        <div class="output-card-title">📈 Umweltleistungs-KPIs</div>
+        <div class="output-card-items">Specific energy [kWh/kg product] · Specific water · Packaging rate · Specific waste · Waste-free share (%)</div>
+      </div>
+
+      <div class="output-card o3">
+        <div class="output-card-title">⚡ Effizienz (Ressource & Energie)</div>
+        <div class="output-card-items">Material efficiency · Energy efficiency · Top materials by volume (kg) · Top materials by CO₂ impact</div>
+      </div>
+
+      <div class="output-card o4">
+        <div class="output-card-title">🌍 CO₂-Emissionen</div>
+        <div class="output-card-items">Material CO₂ · Energy CO₂ · Water CO₂ · Waste CO₂ credits · Net product footprint (kgCO₂e) · PVC tracking</div>
+      </div>
+
+      <div class="output-card o5">
+        <div class="output-card-title">🏆 Top-Listen & CO₂-Kennzahlen</div>
+        <div class="output-card-items">Top waste by volume · Top CO₂ sources · Top CO₂ credits · CO₂ efficiency (kgCO₂e / kg product)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Maintained by Lindner IMS Department · ISO 14001 Environmental Management System · One output sheet is generated automatically for each company / organisational unit / production plant defined in Stammdaten
+  </div>
+
+</div>
+</body>
+</html>
